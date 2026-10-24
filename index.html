@@ -113,10 +113,18 @@ main{margin-top:-22px;position:relative;padding-bottom:40px}
 .lg{display:inline-flex;align-items:center;gap:8px;border:2px solid transparent;background:#fff;border-radius:99px;padding:5px 12px 5px 8px;font-size:.82rem;font-weight:700;box-shadow:inset 0 0 0 1.5px var(--line)}
 .lg::before{content:"";width:14px;height:14px;border-radius:5px;background:var(--bg);box-shadow:inset 0 0 0 3px var(--ed)}
 .lg em{font-style:normal;color:var(--mut);font-weight:600}
-.lg[aria-pressed="true"]{box-shadow:inset 0 0 0 2px var(--ed);background:var(--bg)}
+.lg{transition:all .2s}
+.lg:hover{box-shadow:inset 0 0 0 2px var(--ed)}
+.lg[aria-pressed="true"]{background:var(--ed);color:#fff;box-shadow:0 6px 16px rgba(0,0,0,.25);transform:translateY(-2px) scale(1.05)}
+.lg[aria-pressed="true"]::before{background:#fff;box-shadow:none}
+.lg[aria-pressed="true"] em{color:inherit;opacity:.9}
+.lg.a-lett[aria-pressed="true"]{color:#1a1a1a}
+.lg.reset{background:#1a1a1a;color:#fff;box-shadow:none}
+.lg.reset::before{content:"\00d7";background:none;box-shadow:none;width:auto;height:auto;font-size:1.1rem;line-height:1}
+.legend.has-focus .lg:not([aria-pressed="true"]):not(.reset){opacity:.55}
 
 /* ---------- griglia settimana ---------- */
-.weekwrap{overflow-x:auto;padding:4px 2px 10px;margin:0 -2px}
+.weekwrap{overflow-x:auto;padding:10px 12px 14px;margin:0 -12px}
 .grid{display:grid;grid-template-columns:62px repeat(5,minmax(112px,1fr));
   grid-template-rows:auto repeat(3,minmax(70px,auto)) 18px repeat(3,minmax(70px,auto)) 18px repeat(2,minmax(70px,auto));gap:6px;min-width:760px}
 .dh{background:#fff;border-radius:12px;padding:9px 6px;text-align:center;font-weight:800;box-shadow:inset 0 0 0 1.5px var(--line);position:relative}
@@ -131,7 +139,7 @@ main{margin-top:-22px;position:relative;padding-bottom:40px}
 .les{position:relative;z-index:1;border-radius:12px;padding:10px 12px 12px;background:var(--bg);box-shadow:inset 5px 0 0 var(--ed),0 1px 2px rgba(0,0,0,.06);
   background-image:repeating-linear-gradient(100deg,rgba(255,255,255,.4) 0 3px,transparent 3px 11px);
   display:flex;flex-direction:column;justify-content:center;gap:6px;overflow:hidden;transition:transform .18s,box-shadow .18s,opacity .25s,filter .25s;
-  animation:sprout .5s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i,0)*28ms)}
+  animation:sprout .5s cubic-bezier(.2,.8,.2,1) backwards;animation-delay:calc(var(--i,0)*28ms)}
 .les:hover{transform:translateY(-3px) scale(1.012);box-shadow:inset 5px 0 0 var(--ed),0 10px 22px rgba(0,0,0,.14);z-index:2}
 .les h3{margin:0;font-size:.92rem;font-weight:800;line-height:1.15;padding-left:4px;overflow-wrap:anywhere}
 .les .room,.les .dur{align-self:flex-start;margin-left:4px}
@@ -140,7 +148,12 @@ main{margin-top:-22px;position:relative;padding-bottom:40px}
 .les.ora{box-shadow:inset 5px 0 0 var(--ed),0 0 0 3px var(--g2),0 10px 26px rgba(46,125,50,.35)}
 .les.ora .prog{display:block}
 .les.ora::after{content:"in corso";position:absolute;top:7px;right:8px;background:var(--g2);color:#fff;font-size:.58rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;padding:2px 7px;border-radius:99px}
-.les.dim{opacity:.22;filter:grayscale(.7)}
+.les.dim{opacity:.09;filter:grayscale(1) blur(.4px);transform:scale(.93);box-shadow:none;pointer-events:none}
+.les.hl{z-index:3;transform:scale(1.035);box-shadow:inset 7px 0 0 var(--ed),0 0 0 3px var(--ed),0 14px 28px rgba(0,0,0,.22)}
+.les.hl h3{font-size:1rem}
+.mixbar i{transition:flex .4s,opacity .3s}
+.mixbar i.dim{opacity:.18}
+.focus-on .gh{opacity:.35}
 .les .cl{font-size:1.5rem;font-weight:800;letter-spacing:-.02em;line-height:1;padding-left:4px}
 .les .cl small{font-size:.65rem;letter-spacing:.06em;color:#3b4a3d;margin-left:3px}
 .les .sb{font-size:.76rem;font-weight:600;color:#33433a;padding-left:4px}
@@ -152,7 +165,7 @@ main{margin-top:-22px;position:relative;padding-bottom:40px}
 .dt[aria-pressed="true"]{background:var(--g2);color:#fff;border-color:var(--g2)}
 .dt.oggi::after{content:"";position:absolute;top:5px;right:6px;width:8px;height:8px;border-radius:50%;background:#ffb300}
 .dl{display:flex;flex-direction:column;gap:8px}
-.dc{display:flex;gap:12px;align-items:stretch;animation:sprout .45s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i,0)*45ms)}
+.dc{display:flex;gap:12px;align-items:stretch;animation:sprout .45s cubic-bezier(.2,.8,.2,1) backwards;animation-delay:calc(var(--i,0)*45ms)}
 .dc .t{flex:0 0 58px;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-end;font-variant-numeric:tabular-nums;font-size:.8rem;color:var(--mut);padding:2px 0}
 .dc .t b{color:var(--ink);font-size:.95rem}
 .dc .les{flex:1;min-height:76px;position:relative}
@@ -215,6 +228,9 @@ footer strong{color:#fff}
   .grid{min-width:0;gap:4px;grid-template-rows:auto repeat(3,minmax(38px,auto)) 9px repeat(3,minmax(38px,auto)) 9px repeat(2,minmax(38px,auto))}
   .les{animation:none;box-shadow:inset 4px 0 0 var(--ed);break-inside:avoid;padding:4px 8px;gap:2px}
   .les h3{font-size:.78rem}
+  .les.dim{opacity:1;filter:none;transform:none}
+  .les.hl{transform:none}
+  .lg.reset{display:none}
   .les .dur,.les .prog{display:none!important}
   .les .room{font-size:.6rem;padding:1px 7px}
   .dh{padding:5px 4px;font-size:.85rem}
@@ -436,15 +452,20 @@ function renderMix(c){
   lessons(c).forEach(x=>{cnt[x.area]=(cnt[x.area]||0)+x.n;tot+=x.n});
   const ar=AREA_ORD.filter(a=>cnt[a]);
   $('#mix').innerHTML=`<div class="mixbar" aria-hidden="true">${ar.map(a=>`<i class="a-${a}" style="flex:${cnt[a]}"></i>`).join('')}</div>
-  <div class="legend" role="group" aria-label="Filtra per area">${ar.map(a=>`<button type="button" class="lg a-${a}" data-a="${a}" aria-pressed="false">${AREE[a]} <em>${cnt[a]} h</em></button>`).join('')}</div>`;
+  <div class="legend" role="group" aria-label="Filtra per area">${ar.map(a=>`<button type="button" class="lg a-${a}" data-a="${a}" aria-pressed="false">${AREE[a]} <em>${cnt[a]} h</em></button>`).join('')}<button type="button" class="lg reset" hidden>Mostra tutte</button></div>`;
   $('#mix').onclick=e=>{
     const b=e.target.closest('.lg');if(!b)return;
-    st.focus=st.focus===b.dataset.a?null:b.dataset.a;applyFocus();
+    st.focus=b.classList.contains('reset')?null:(st.focus===b.dataset.a?null:b.dataset.a);applyFocus();
   };
 }
 function applyFocus(){
-  $$('#mix .lg').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.a===st.focus)));
-  $$('#classBody .les').forEach(e=>e.classList.toggle('dim',!!st.focus&&e.dataset.area!==st.focus));
+  const f=st.focus;
+  $$('#mix .lg[data-a]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.a===f)));
+  $$('#mix .mixbar i').forEach(i=>i.classList.toggle('dim',!!f&&!i.classList.contains('a-'+f)));
+  const rs=$('#mix .reset');if(rs)rs.hidden=!f;
+  const lg=$('#mix .legend');if(lg)lg.classList.toggle('has-focus',!!f);
+  $('#classBody').classList.toggle('focus-on',!!f);
+  $$('#classBody .les').forEach(e=>{const on=!!f&&e.dataset.area===f;e.classList.toggle('hl',on);e.classList.toggle('dim',!!f&&!on)});
 }
 
 /* ---------- vista giorno ---------- */
